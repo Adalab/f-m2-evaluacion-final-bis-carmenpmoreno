@@ -16,9 +16,13 @@ function handleInputClick(event) {
   // console.log(event); se hac un evento por el click del radio y otro por mi adEventListener
   if (event.currentTarget.classList.contains('selected')) {
     event.currentTarget.classList.remove('selected');
-  } 
+    const innerHtmlEvent = event.currentTarget;
+    console.log(innerHtmlEvent);
+      //  + 'deseleccionado');
+  }
   else {
     event.currentTarget.classList.add('selected');
+    console.log('seleccionado');
   }
 }
 
