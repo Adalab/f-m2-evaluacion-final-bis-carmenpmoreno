@@ -3,8 +3,6 @@
 console.log('>> Ready :)');
 
 // 1. Escuchar al click sobre el input
-// 2.Crear 8 divs en el html, 4 encima y 4 debajo
-// 3. 4 de ellos con la imagen de placeholder adalab: https://via.placeholder.com/160x195/30d9c4/ffffff/?text=ADALAB
 
 const inputContainers = document.querySelectorAll('.select__option-container');
 
@@ -13,26 +11,33 @@ for (const inputContainerEl of inputContainers) {
 }
 
 function handleInputClick(event) {
-changeColor(event);
-// function selectCardsChoice (event) {
-  
-// }
-}
-
-function changeColor(event) {
   if (event.currentTarget.classList.contains('check')) {
     event.currentTarget.classList.remove('check');
-  }
-  else {
-    for (let i=0; i<inputContainers.length; i++) {
+  } else {
+    for (let i = 0; i < inputContainers.length; i++) {
       inputContainers[i].classList.remove('check');
     }
     event.currentTarget.classList.add('check');
-    
-  //   fetch()
-  //   .then({
-
-  //   })
-  //   .then()
+    event.currentTarget.children[0].classList.add('input-checked');
   }
 }
+
+const buttonEl = document.querySelector('.btn');
+
+// 2. Escuchar el click sobre el botón de comenzar
+buttonEl.addEventListener('click', handleButtonClick);
+// función que maneje el click del botón y haga petición de data en función del input seleccionado
+function handleButtonClick() {
+// hacer una petición al servidor con el número indicado en el value del input que tenga la clase input-checked
+  const inputChecked = document.querySelector('.input-checked');
+  console.log(inputChecked.value);
+  fetch(`https://raw.githubusercontent.com/Adalab/cards-data/master/${inputChecked.value}.json`)
+    .then(function(response) {
+      return response.json();
+    })
+    .then(function(data){
+      console.log(data)
+    });
+  
+}
+
