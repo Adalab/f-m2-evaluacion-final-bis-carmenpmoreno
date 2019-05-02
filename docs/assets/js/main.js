@@ -1,1 +1,1 @@
-"use strict";console.log(">> Ready :)");
+"use strict";console.log(">> Ready :)");const inputContainers=document.querySelectorAll(".select__option-container");console.log(inputContainers);for(const e of inputContainers)e.addEventListener("click",handleInputClick);function handleInputClick(e){if(e.currentTarget.classList.contains("selected")){e.currentTarget.classList.remove("selected");const t=e.currentTarget;console.log(t)}else e.currentTarget.classList.add("selected"),console.log("seleccionado")}
