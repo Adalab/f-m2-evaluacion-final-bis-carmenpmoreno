@@ -2,7 +2,7 @@
 
 console.log('>> Ready :)');
 
-// 1. Escuchar al click sobre el input
+// 1. Escuchar al click sobre el input y añadirle clase input-checked. Además, evitamos que cuando seleccionemos otro, se quede el anterior imput seleccionado
 
 const inputContainers = document.querySelectorAll('.select__option-container');
 
@@ -22,22 +22,35 @@ function handleInputClick(event) {
   }
 }
 
-const buttonEl = document.querySelector('.btn');
+// 2. Escuchar el click sobre el botón y pintar las cartas traseras y delanteras
 
-// 2. Escuchar el click sobre el botón de comenzar
+const buttonEl = document.querySelector('.btn');
+const ulEl = document.querySelector('.cards-list');
+
 buttonEl.addEventListener('click', handleButtonClick);
-// función que maneje el click del botón y haga petición de data en función del input seleccionado
 function handleButtonClick() {
-// hacer una petición al servidor con el número indicado en el value del input que tenga la clase input-checked
   const inputChecked = document.querySelector('.input-checked');
-  console.log(inputChecked.value);
+  for(let i=0; i<inputChecked.value; i++) {
+    console.log('print cards');
+    printBackCards();
+    // investigar como puedo ejecutar la función tantas veces como mi inputChecked.value!!
+  }
   fetch(`https://raw.githubusercontent.com/Adalab/cards-data/master/${inputChecked.value}.json`)
     .then(function(response) {
       return response.json();
     })
     .then(function(data){
-      console.log(data)
+      console.log(data);
     });
-  
 }
 
+function printBackCards() {
+  // intento de DOM elegante:
+    // const itemList = document.createElement('li');
+    // const imgEl = document.createElement('img');
+    // itemList.appendChild(imgEl);
+    // console.log(itemList);
+  ulEl.innerHTML = '<li class="card"></li>';
+  const liEl = document.querySelector('.card');
+  liEl.innerHTML = '<img src="https://via.placeholder.com/160x195/30d9c4/ffffff/?text=ADALAB" alt="trasera de la carta"/>';
+}
