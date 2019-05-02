@@ -1,4 +1,5 @@
 <main class="page__main">
+  
   <h1 class="main-title">El juego de las parejas</h1>
 
   <form action="" method="get" class="select-form">
@@ -8,7 +9,7 @@
           id="option4"
           type="radio"
           name="option4"
-          value = "4"
+          value="4"
           class="select__option"
           checked
         />
@@ -16,30 +17,31 @@
       4
     </label>
     <label for="option6" class="select-form__label">
-        <div class="select__option-container">
-          <input
-            id="option6"
-            type="radio"
-            name="option6"
-            value="6"
-            class="select__option"
-          />
-        </div>
-        6
-      </label>
-      <label for="option8" class="select-form__label">
-          <div class="select__option-container">
-            <input
-              id="option8"
-              type="radio"
-              name="option8"
-              value="8"
-              class="select__option"
-            />
-          </div>
-          8
-        </label>
+      <div class="select__option-container">
+        <input
+          id="option6"
+          type="radio"
+          name="option6"
+          value="6"
+          class="select__option"
+        />
+      </div>
+      6
+    </label>
+    <label for="option8" class="select-form__label">
+      <div class="select__option-container">
+        <input
+          id="option8"
+          type="radio"
+          name="option8"
+          value="8"
+          class="select__option"
+        />
+      </div>
+      8
+    </label>
 
     <button class="btn">Comenzar</button>
   </form>
+  <partial src="_cards.html" label="cards"></partial>
 </main>

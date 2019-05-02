@@ -1,0 +1,16 @@
+.main-section {
+  display: flex;
+  justify-content: center;
+}
+.cards-list {
+  display: flex;
+  flex-direction: column;
+  @media all and (min-width: 767px) {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+}
+.card {
+  list-style: none;
+}

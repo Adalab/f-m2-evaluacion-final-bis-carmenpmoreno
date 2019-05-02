@@ -2,7 +2,9 @@
 
 console.log('>> Ready :)');
 
-// 1. Escuchar el click sobre el container del input y añadirle la clase select__option-checked
+// 1. Escuchar al click sobre el input
+// 2.Crear 8 divs en el html, 4 encima y 4 debajo
+// 3. 4 de ellos con la imagen de placeholder adalab: https://via.placeholder.com/160x195/30d9c4/ffffff/?text=ADALAB
 
 const inputContainers = document.querySelectorAll('.select__option-container');
 
@@ -12,7 +14,9 @@ for (const inputContainerEl of inputContainers) {
 
 function handleInputClick(event) {
 changeColor(event);
-
+// function selectCardsChoice (event) {
+  
+// }
 }
 
 function changeColor(event) {
@@ -24,10 +28,11 @@ function changeColor(event) {
       inputContainers[i].classList.remove('check');
     }
     event.currentTarget.classList.add('check');
-    console.log('seleccionado');
+    
+  //   fetch()
+  //   .then({
+
+  //   })
+  //   .then()
   }
 }
-
-
-//   <ul class="cards-list"></ul>
-//   <li class="cards-list__item"></li>
