@@ -7,8 +7,8 @@ console.log('>> Ready :)');
 
 const inputContainers = document.querySelectorAll('.select__option-container');
 const buttonEl = document.querySelector('.btn');
-const backCards = document.querySelector('.back-cards');
-const frontCards = document.querySelector('.front-cards');
+const backCardsList = document.querySelector('.back-cards');
+const frontCardsList = document.querySelector('.front-cards');
 
 for (const inputContainerEl of inputContainers) {
   inputContainerEl.addEventListener('click', handleInputClick);
@@ -32,9 +32,9 @@ buttonEl.addEventListener('click', handleButtonClick);
 
 function handleButtonClick() {
   const inputChecked = document.querySelector('.input-checked');
+  const value = inputChecked.value;
   const backImage =
     '<img src="https://via.placeholder.com/160x195/30d9c4/ffffff/?text=ADALAB" alt="trasera de la carta"/>';
-  const value = inputChecked.value;
   printBackCards(backImage, value);
   fetch(
     `https://raw.githubusercontent.com/Adalab/cards-data/master/${
@@ -46,23 +46,37 @@ function handleButtonClick() {
     })
     .then(function(data) {
       console.log(data);
-      for (let i = 0; i < data.length; i++) {
-        function printFrontCards() {
-          frontCards.innerHTML += '<li class="card"></li>';
-          const Cards = document.querySelectorAll('.card');
-          let pokemonImages = `<img src="${data[i].image}" alt="${data[i].name}"/>`;
-          console.log(pokemonImages);
-          Cards[i].innerHTML = pokemonImages;
-        }
-        printFrontCards();
-      }
+      printFrontCards(data);
     });
 }
 
 function printBackCards(image, value) {
   for (let i = 0; i < value; i++) {
-    backCards.innerHTML += '<li class="card"></li>';
-    const Cards = document.querySelectorAll('.card');
-    Cards[i].innerHTML = image;
+    backCardsList.innerHTML += '<li class="back-card"></li>';
+    const backCardsItems = document.querySelectorAll('.back-card');
+    backCardsItems[i].innerHTML = image;
+    clickBackCard(backCardsItems);
   }
 }
+function printFrontCards(data) {
+  for (let i = 0; i < data.length; i++) {
+    frontCardsList.innerHTML += '<li class="front-card hidden"></li>';
+    const frontCardsItems = document.querySelectorAll('.front-card');
+    let pokemonImages = `<img src="${data[i].image}" alt="${data[i].name}"/>`;
+    frontCardsItems[i].innerHTML = pokemonImages;
+  }
+}
+// 3. Guardar el número de cartas pedidas en el Local Storage
+
+// 4. Interacción para dar la vuelta a la carta
+// escuchar el click sobre la carta trasera
+function clickBackCard(backCardsItems) {
+  for (const backCardItem of backCardsItems) {
+    backCardItem.addEventListener('click', handleBackCardClick);
+  }
+  function handleBackCardClick() {
+    console.log('click sobre la carta trasera');
+  }  
+}
+
+// se oculta la back-card y se ve la front-card
