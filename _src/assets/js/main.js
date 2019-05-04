@@ -3,11 +3,12 @@
 
 console.log('>> Ready :)');
 
-// 1. Escuchar al click sobre el input y añadirle clase input-checked. Además, evitamos que cuando seleccionemos otro, se quede el anterior imput seleccionado
-
+// CONSTANTES
 const inputContainers = document.querySelectorAll('.select__option-container');
 const buttonEl = document.querySelector('.btn');
-const CardsList = document.querySelector('.cards');
+const mainSection = document.querySelector('.main-section');
+
+// 1. Escuchar al click sobre el div de color del input y añadirle al imput de dentro la clase input-checked. Además, evitamos que cuando seleccionemos otro, se quede el anterior div de color del imput y el propio input seleccionado
 
 for (const inputContainerEl of inputContainers) {
   inputContainerEl.addEventListener('click', handleInputClick);
@@ -26,7 +27,7 @@ function handleInputClick(event) {
   }
 }
 
-// 2. Escuchar el click sobre el botón y pintar las cartas traseras y delanteras
+// 2. Escuchar el click sobre el botón y pintar las cartas traseras y delanteras en una misma lista
 
 buttonEl.addEventListener('click', handleButtonClick);
 
@@ -35,35 +36,37 @@ function handleButtonClick() {
   const value = inputChecked.value;
   const backImage =
     '<img src="https://via.placeholder.com/160x195/30d9c4/ffffff/?text=ADALAB" alt="trasera de la carta" class="back-image"/>';
-  // printBackCards(backImage, value);
-  fetch(
-    `https://raw.githubusercontent.com/Adalab/cards-data/master/${
-      inputChecked.value
-    }.json`
-  )
-    .then(function(response) {
-      return response.json();
-    })
-    .then(function(data) {
-      console.log(data);
-      for (let i = 0; i < data.length; i++) {
-        let FrontImages = `<img src="${data[i].image}" alt="${
-          data[i].name
-        }" class="front-image"/>`;
-      }
-
-      printCards(backImage, FrontImages, value, data);
-    });
+  printCards(value, backImage);
+  // fetch(
+  //   `https://raw.githubusercontent.com/Adalab/cards-data/master/${
+  //     inputChecked.value
+  //   }.json`
+  // )
+  //   .then(function(response) {
+  //     return response.json();
+  //   })
+  //   .then(function(data) {
+  //     console.log(data);
+  //     for (let i = 0; i < data.length; i++) {
+  //       let FrontImages = `<img src="${data[i].image}" alt="${
+  //         data[i].name
+  //       }" class="front-image"/>`;
+  //       printCards(backImage, FrontImages, value, data);
+  //     }
+  //   });
 }
 
-function printCards(image, pokemonImages, value, data) {
+function printCards(value, image) {
+  mainSection.innerHTML = '<ul class="cards"></ul>';
+  const CardsList = document.querySelector('.cards');
   for (let i = 0; i < value; i++) {
     CardsList.innerHTML += '<li class="card"></li>';
     const CardsItems = document.querySelectorAll('.card');
-    CardsItems[i].innerHTML = image + FrontImages;
+    CardsItems[i].innerHTML = image;
+    // + FrontImages;
     // 4. Interacción para dar la vuelta a la carta
     // escuchar el click sobre la carta trasera
-    clickCard(CardsItems);
+    // clickCard(CardsItems);
   }
 }
 // function printFrontCards(data) {
@@ -77,14 +80,14 @@ function printCards(image, pokemonImages, value, data) {
 // 3. Guardar el número de cartas pedidas en el Local Storage
 // ...TO DO!!
 
-function clickCard(CardsItems) {
-  for (const CardItem of CardsItems) {
-    CardItem.addEventListener('click', handleCardClick);
-  }
-  function handleCardClick(event) {
-    console.log('ocultar la carta trasera');
-    event.currentTarget.classList.add('hidden');
-  }
-}
+// function clickCard(CardsItems) {
+//   for (const CardItem of CardsItems) {
+//     CardItem.addEventListener('click', handleCardClick);
+//   }
+//   function handleCardClick(event) {
+//     console.log('ocultar la carta trasera');
+//     event.currentTarget.classList.add('hidden');
+//   }
+// }
 
 // se oculta la back-card y se ve la front-card

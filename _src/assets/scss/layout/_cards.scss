@@ -14,11 +14,11 @@
 .card {
   list-style: none;
   height: 195px;
-  border: grey solid 1px;
+  border: grey solid 2px;
   border-radius: 10%;
   margin: 5px;
 }
-.image {
+.back-image, .front-image {
   height: 195px;
   width: 160px;
   border-radius: 10%;
