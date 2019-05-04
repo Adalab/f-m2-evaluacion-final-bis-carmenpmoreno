@@ -13,7 +13,15 @@
 }
 .back-card, .front-card {
   list-style: none;
+  height: 195px;
+  border: grey solid 1px;
+  border-radius: 10%;
   margin: 5px;
+}
+.back-image, .front-image {
+  height: 195px;
+  width: 160px;
+  border-radius: 10%;
 }
 .hidden {
   display: none;
