@@ -2,7 +2,7 @@
   display: flex;
   justify-content: center;
 }
-.back-cards, .front-cards {
+.cards {
   display: flex;
   flex-direction: column;
   @media all and (min-width: 767px) {
@@ -11,14 +11,14 @@
     justify-content: space-around;
   }
 }
-.back-card, .front-card {
+.card {
   list-style: none;
   height: 195px;
   border: grey solid 1px;
   border-radius: 10%;
   margin: 5px;
 }
-.back-image, .front-image {
+.image {
   height: 195px;
   width: 160px;
   border-radius: 10%;
