@@ -51,31 +51,47 @@ function handleButtonClick() {
 function printCards(value, data) {
   mainSection.innerHTML = '<ul class="cards"></ul>';
   const cardsList = document.querySelector('.cards');
-  const backImage =
+  let backImage =
     '<img src="https://via.placeholder.com/160x195/30d9c4/ffffff/?text=ADALAB" alt="trasera de la carta" class="back-image"/>';
   for (let i = 0; i < value; i++) {
     cardsList.innerHTML += '<li class="card"></li>';
     const cards = document.querySelectorAll('.card');
+
+    for (const card of cards) {
+      card.addEventListener('click', handleImagesClick);
+    }
+
     let frontImage = `<img src="${data[i].image}" alt="${
       data[i].name
     }" class="front-image hidden"/>`;
     console.log(frontImage);
 
     cards[i].innerHTML = backImage + frontImage;
+    console.log(cards);
   }
+  // 4. Interacción para dar la vuelta a la carta
+
+  // escuchar el click sobre las imágenes de las cartas
+
+  // const backImages = document.querySelectorAll('.back-image');
+
+  // const frontImages = document.querySelectorAll('.front-image');
+
+  // for (const backImg of backImages) {
+  //   backImg.addEventListener('click', handleImagesClick);
+  // }
+  // for (const frontImg of frontImages) {
+  //   frontImg.addEventListener('click', handleImagesClick);
+  // }
 }
 // 3. Guardar el número de cartas pedidas en el Local Storage
 // ...TO DO!!
 
-// 4. Interacción para dar la vuelta a la carta
-
-// escuchar el click sobre las imágenes de las cartas
-backImage.addEventListener('click', handleImagesClick);
-frontImage.addEventListener('click', handleImagesClick);
-
+// // se oculta la back-card y se ve la front-card
 function handleImagesClick(event) {
-  console.log('ocultar la carta trasera');
-  event.currentTarget.classList.toggle('hidden');
+  console.log('click sobre carta');
+  console.log(event.currentTarget.children.length);
+  for (let i=0; i<event.currentTarget.children.length; i++) {
+    event.currentTarget.children[i].classList.toggle('hidden');
+  }
 }
-
-// se oculta la back-card y se ve la front-card
