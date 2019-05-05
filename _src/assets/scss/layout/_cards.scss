@@ -3,22 +3,21 @@
   justify-content: center;
 }
 .cards {
+  padding: 10px;
   display: flex;
-  flex-direction: column;
-  @media all and (min-width: 767px) {
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-around;
-  }
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
 }
 .card {
   list-style: none;
   height: 195px;
   border: grey solid 2px;
   border-radius: 10%;
-  margin: 5px;
+  margin: 10px;
 }
-.back-image, .front-image {
+.back-image,
+.front-image {
   height: 195px;
   width: 160px;
   border-radius: 10%;

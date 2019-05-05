@@ -1,16 +1,18 @@
-// * {
-//   border: blue solid 1px;
-// }
+body {
+  margin: 0;
+  padding: 0;
+}
 .main-title {
   font-family: Arial, Helvetica, sans-serif;
   text-align: center;
+  padding: 10px;
 }
 .select-form {
   display: flex;
   justify-content: center;
 }
 .select-form__label {
-  margin-left: 20px;
+  margin-left: 5px;
   display: flex;
 }
 .select__option-container {
@@ -34,7 +36,7 @@
   background-color: rgb(0, 204, 255);
 }
 .btn {
-  margin-left: 20px;
+  margin-left: 5px;
   background-color: #fff;
   border: rgb(4, 186, 231) 2px solid;
   border-radius: 10%;
