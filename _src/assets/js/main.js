@@ -18,16 +18,13 @@ for (const inputContainerEl of inputContainers) {
 }
 
 function handleInputClick(event) {
-  if (event.currentTarget.classList.contains('check')) {
-    event.currentTarget.classList.remove('check');
-  } else {
+  if (!event.currentTarget.classList.contains('check')) {
     for (let i = 0; i < inputContainers.length; i++) {
       inputContainers[i].classList.remove('check');
       inputContainers[i].children[0].classList.remove('input-checked');
     }
     event.currentTarget.classList.add('check');
     event.currentTarget.children[0].classList.add('input-checked');
-
     // AHORA GUÁRDAMELO TODO EN EL LOCAL STORAGE, PRIMERO RECOJO LAS CONSTANTES QUE NECESITO
     const inputChecked = document.querySelector('.input-checked');
     const value = inputChecked.value;
