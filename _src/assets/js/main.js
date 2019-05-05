@@ -1,18 +1,12 @@
-/* eslint-disable no-inner-declarations */
 'use strict';
 
-console.log('>> Ready :)');
 
-// CONSTANTES
 const inputContainers = document.querySelectorAll('.select__option-container');
 const buttonEl = document.querySelector('.btn');
 const mainSection = document.querySelector('.main-section');
 
-// 1. Escuchar al click sobre el div de color del input y añadirle al imput de dentro la clase input-checked. Además, evitamos que cuando seleccionemos otro, se quede el anterior div de color del imput y el propio input seleccionado
-
 for (const inputContainerEl of inputContainers) {
   inputContainerEl.addEventListener('click', handleInputClick);
-  console.log(inputContainerEl);
 }
 
 function handleInputClick(event) {
@@ -28,34 +22,27 @@ function handleInputClick(event) {
   }
 }
 
-// 2. Escuchar el click sobre el botón y pintar las cartas traseras y delanteras en una misma lista
-
 buttonEl.addEventListener('click', handleButtonClick);
 
 function handleButtonClick() {
   const inputChecked = document.querySelector('.input-checked');
   const value = inputChecked.value;
-  fetch(
-    `https://raw.githubusercontent.com/Adalab/cards-data/master/${
-      inputChecked.value
-    }.json`
-  )
+  fetch(`https://raw.githubusercontent.com/Adalab/cards-data/master/${inputChecked.value}.json`)
     .then(function(response) {
       return response.json();
     })
     .then(function(data) {
-      console.log(data);
       printCards(value, data);
     });
   // 3. Guardar el número de cartas pedidas en el Local Storage
-  localStorage.setItem('inputcheckedsave', JSON.stringify(inputChecked.value));
-  const savedInputChecked = JSON.parse(localStorage.getItem('inputcheckedsave'));
-  // if (inputContainers.classList.contains('check')) {
-  //   console.log('Ya hay un input seleccionado');
-  // } 
-  // else {
-  //   // buscame el input que tenga de value el que he guardado y selecciónamelo
-  // }
+  localStorage.setItem('value', JSON.stringify(value));
+  const savedValue = JSON.parse(localStorage.getItem('value'));
+
+  console.log('valor del input guardado: ', value);
+  console.log('valor del input recuperado: ', savedValue);
+  // ambos guardados como números! bien!!
+
+// si ningún input 
 }
 
 function printCards(value, data) {
@@ -68,23 +55,18 @@ function printCards(value, data) {
     const cards = document.querySelectorAll('.card');
 
     for (const card of cards) {
-      card.addEventListener('click', handleImagesClick);
+      card.addEventListener('click', handleCardsClick);
     }
 
     let frontImage = `<img src="${data[i].image}" alt="${
       data[i].name
     }" class="front-image hidden"/>`;
-    console.log(frontImage);
 
     cards[i].innerHTML = backImage + frontImage;
-    console.log(cards);
   }
-  // 4. Interacción para dar la vuelta a la carta
-  function handleImagesClick(event) {
-    console.log('click sobre carta');
-    console.log(event.currentTarget.children.length);
-    for (let i = 0; i < event.currentTarget.children.length; i++) {
-      event.currentTarget.children[i].classList.toggle('hidden');
-    }
+}
+function handleCardsClick(event) {
+  for (let i = 0; i < event.currentTarget.children.length; i++) {
+    event.currentTarget.children[i].classList.toggle('hidden');
   }
 }
