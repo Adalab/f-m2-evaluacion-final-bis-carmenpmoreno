@@ -12,6 +12,7 @@ const mainSection = document.querySelector('.main-section');
 
 for (const inputContainerEl of inputContainers) {
   inputContainerEl.addEventListener('click', handleInputClick);
+  console.log(inputContainerEl);
 }
 
 function handleInputClick(event) {
@@ -46,6 +47,15 @@ function handleButtonClick() {
       console.log(data);
       printCards(value, data);
     });
+  // 3. Guardar el número de cartas pedidas en el Local Storage
+  localStorage.setItem('inputcheckedsave', JSON.stringify(inputChecked.value));
+  const savedInputChecked = JSON.parse(localStorage.getItem('inputcheckedsave'));
+  // if (inputContainers.classList.contains('check')) {
+  //   console.log('Ya hay un input seleccionado');
+  // } 
+  // else {
+  //   // buscame el input que tenga de value el que he guardado y selecciónamelo
+  // }
 }
 
 function printCards(value, data) {
@@ -70,28 +80,11 @@ function printCards(value, data) {
     console.log(cards);
   }
   // 4. Interacción para dar la vuelta a la carta
-
-  // escuchar el click sobre las imágenes de las cartas
-
-  // const backImages = document.querySelectorAll('.back-image');
-
-  // const frontImages = document.querySelectorAll('.front-image');
-
-  // for (const backImg of backImages) {
-  //   backImg.addEventListener('click', handleImagesClick);
-  // }
-  // for (const frontImg of frontImages) {
-  //   frontImg.addEventListener('click', handleImagesClick);
-  // }
-}
-// 3. Guardar el número de cartas pedidas en el Local Storage
-// ...TO DO!!
-
-// // se oculta la back-card y se ve la front-card
-function handleImagesClick(event) {
-  console.log('click sobre carta');
-  console.log(event.currentTarget.children.length);
-  for (let i=0; i<event.currentTarget.children.length; i++) {
-    event.currentTarget.children[i].classList.toggle('hidden');
+  function handleImagesClick(event) {
+    console.log('click sobre carta');
+    console.log(event.currentTarget.children.length);
+    for (let i = 0; i < event.currentTarget.children.length; i++) {
+      event.currentTarget.children[i].classList.toggle('hidden');
+    }
   }
 }
