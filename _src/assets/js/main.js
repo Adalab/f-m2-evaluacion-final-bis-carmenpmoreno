@@ -1,12 +1,20 @@
 'use strict';
 
-
 const inputContainers = document.querySelectorAll('.select__option-container');
 const buttonEl = document.querySelector('.btn');
 const mainSection = document.querySelector('.main-section');
 
 for (const inputContainerEl of inputContainers) {
   inputContainerEl.addEventListener('click', handleInputClick);
+}
+
+const savedValue = JSON.parse(localStorage.getItem('value'));
+
+for (let i = 0; i < inputContainers.length; i++) {
+  if (inputContainers[i].children[0].value === savedValue) {
+    console.log('input ANTES seleccionado');
+    inputContainers[i].classList.add('check');
+  }
 }
 
 function handleInputClick(event) {
@@ -19,6 +27,16 @@ function handleInputClick(event) {
     }
     event.currentTarget.classList.add('check');
     event.currentTarget.children[0].classList.add('input-checked');
+
+    // AHORA GUÁRDAMELO TODO EN EL LOCAL STORAGE, PRIMERO RECOJO LAS CONSTANTES QUE NECESITO
+    const inputChecked = document.querySelector('.input-checked');
+    const value = inputChecked.value;
+    // 3. Guardar el número de cartas pedidas en el Local Storage
+    localStorage.setItem('value', JSON.stringify(value));
+    const savedValue = JSON.parse(localStorage.getItem('value'));
+    console.log('valor del input guardado: ', value);
+    console.log('valor del input recuperado: ', savedValue);
+    // si ningún input
   }
 }
 
@@ -27,22 +45,17 @@ buttonEl.addEventListener('click', handleButtonClick);
 function handleButtonClick() {
   const inputChecked = document.querySelector('.input-checked');
   const value = inputChecked.value;
-  fetch(`https://raw.githubusercontent.com/Adalab/cards-data/master/${inputChecked.value}.json`)
+  fetch(
+    `https://raw.githubusercontent.com/Adalab/cards-data/master/${
+      inputChecked.value
+    }.json`
+  )
     .then(function(response) {
       return response.json();
     })
     .then(function(data) {
       printCards(value, data);
     });
-  // 3. Guardar el número de cartas pedidas en el Local Storage
-  localStorage.setItem('value', JSON.stringify(value));
-  const savedValue = JSON.parse(localStorage.getItem('value'));
-
-  console.log('valor del input guardado: ', value);
-  console.log('valor del input recuperado: ', savedValue);
-  // ambos guardados como números! bien!!
-
-// si ningún input 
 }
 
 function printCards(value, data) {
