@@ -58,7 +58,6 @@ function printCards(value, data) {
 
 function listenerOnCards(cards) {
   for (const card of cards) {
-    console.log('les pongo un listener');
     card.addEventListener('click', handleCardsClick);
   }
 }
