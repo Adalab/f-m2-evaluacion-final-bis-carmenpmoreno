@@ -45,15 +45,21 @@ function handleButtonClick() {
 function printCards(value, data) {
   mainSection.innerHTML = '<ul class="cards"></ul>';
   const cardsList = document.querySelector('.cards');
-  let backImage = '<img src="https://via.placeholder.com/160x195/30d9c4/ffffff/?text=ADALAB" alt="trasera de la carta" class="back-image"/>';
+  const backImage = '<img src="https://via.placeholder.com/160x195/30d9c4/ffffff/?text=ADALAB" alt="trasera de la carta" class="back-image"/>';
   for (let i = 0; i < value; i++) {
     cardsList.innerHTML += '<li class="card"></li>';
     const cards = document.querySelectorAll('.card');
-    for (const card of cards) {
-      card.addEventListener('click', handleCardsClick);
-    }
     let frontImage = `<img src="${data[i].image}" alt="${data[i].name}" class="front-image hidden"/>`;
     cards[i].innerHTML = backImage + frontImage;
+  }
+  const cards = document.querySelectorAll('.card');
+  listenerOnCards(cards);
+}
+
+function listenerOnCards(cards) {
+  for (const card of cards) {
+    console.log('les pongo un listener');
+    card.addEventListener('click', handleCardsClick);
   }
 }
 function handleCardsClick(event) {

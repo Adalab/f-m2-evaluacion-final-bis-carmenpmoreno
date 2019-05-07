@@ -22,21 +22,21 @@ body {
   border: 1px solid grey;
   border-radius: 50%;
 }
+.check {
+  background-color: rgb(0, 204, 255);
+}
 .select__option {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
   box-sizing: content-box;
-  // border: white solid 1px;
   background-color: #fff;
   border-radius: 50%;
   height: 6px;
   width: 6px;
   transform: translateY(-3.5px);
 }
-.check {
-  background-color: rgb(0, 204, 255);
-}
+
 .btn {
   -webkit-appearance: none;
   -moz-appearance: none;
