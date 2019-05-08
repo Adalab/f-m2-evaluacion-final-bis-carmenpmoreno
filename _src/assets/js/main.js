@@ -24,32 +24,39 @@ function handleInputClick(event) {
     event.currentTarget.classList.add('check');
     event.currentTarget.children[0].classList.add('input-checked');
     const inputChecked = document.querySelector('.input-checked');
-    const value = inputChecked.value;
-    localStorage.setItem('value', value);
+    const valueChecked = inputChecked.value;
+    for (let i = 0; i < inputContainers.length; i++) {
+      localStorage.setItem('value', valueChecked);
+    }
   }
 }
 
 buttonEl.addEventListener('click', handleButtonClick);
 function handleButtonClick() {
   const inputChecked = document.querySelector('.input-checked');
-  const value = inputChecked.value;
-  fetch(`https://raw.githubusercontent.com/Adalab/cards-data/master/${inputChecked.value}.json`)
+  const valueChecked = inputChecked.value;
+  fetch(
+    `https://raw.githubusercontent.com/Adalab/cards-data/master/${valueChecked}.json`
+  )
     .then(function(response) {
       return response.json();
     })
     .then(function(data) {
-      printCards(value, data);
+      printCards(valueChecked, data);
     });
 }
 
 function printCards(value, data) {
   mainSection.innerHTML = '<ul class="cards"></ul>';
   const cardsList = document.querySelector('.cards');
-  const backImage = '<img src="https://via.placeholder.com/160x195/30d9c4/ffffff/?text=ADALAB" alt="trasera de la carta" class="back-image"/>';
+  const backImage =
+    '<img src="https://via.placeholder.com/160x195/30d9c4/ffffff/?text=ADALAB" alt="trasera de la carta" class="back-image"/>';
   for (let i = 0; i < value; i++) {
     cardsList.innerHTML += '<li class="card"></li>';
     const cards = document.querySelectorAll('.card');
-    let frontImage = `<img src="${data[i].image}" alt="${data[i].name}" class="front-image hidden"/>`;
+    let frontImage = `<img src="${data[i].image}" alt="${
+      data[i].name
+    }" class="front-image hidden"/>`;
     cards[i].innerHTML = backImage + frontImage;
   }
   const cards = document.querySelectorAll('.card');
