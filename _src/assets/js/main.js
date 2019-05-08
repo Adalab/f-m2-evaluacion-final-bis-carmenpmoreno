@@ -53,11 +53,13 @@ function printCards(value, data) {
     '<img src="https://via.placeholder.com/160x195/30d9c4/ffffff/?text=ADALAB" alt="trasera de la carta" class="back-image"/>';
   for (let i = 0; i < value; i++) {
     cardsList.innerHTML += '<li class="card"></li>';
+
     const cards = document.querySelectorAll('.card');
-    let frontImage = `<img src="${data[i].image}" alt="${
-      data[i].name
-    }" class="front-image hidden"/>`;
-    cards[i].innerHTML = backImage + frontImage;
+    let frontImage = `<img src="${data[i].image}" alt="${data[i].name}" class="front-image hidden"/>`;
+    cards[i].innerHTML = backImage + frontImage + '<h2 class="card-title hidden"></h2>';
+
+    const cardTitle = document.querySelectorAll('.card-title');
+    cardTitle[i].innerHTML = data[i].name;
   }
   const cards = document.querySelectorAll('.card');
   listenerOnCards(cards);
@@ -70,6 +72,15 @@ function listenerOnCards(cards) {
 }
 function handleCardsClick(event) {
   for (let i = 0; i < event.currentTarget.children.length; i++) {
-    event.currentTarget.children[i].classList.toggle('hidden');
+    if(event.currentTarget.children[1].classList.contains('hidden')) {
+      event.currentTarget.children[0].classList.add('hidden');
+      event.currentTarget.children[1].classList.remove('hidden');
+      event.currentTarget.children[2].classList.remove('hidden');
+    }
+    else {
+      event.currentTarget.children[1].classList.add('hidden');
+      event.currentTarget.children[0].classList.remove('hidden');
+      event.currentTarget.children[2].classList.add('hidden');
+    }
   }
 }

@@ -15,13 +15,23 @@
   border: grey solid 2px;
   border-radius: 10%;
   margin: 10px;
+  display: flex;
+  flex-direction: column;
 }
 .back-image,
 .front-image {
-  height: 195px;
-  width: 160px;
   border-radius: 10%;
+}
+.front-image {
+  height: 150px;
+  width: 150px;
+  margin: 5px;
 }
 .hidden {
   display: none;
+}
+.card-title {
+  font-size: 16px;
+  color: rgb(90, 90, 90);
+  align-self: center;
 }
