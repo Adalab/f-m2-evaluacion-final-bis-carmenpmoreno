@@ -3,7 +3,7 @@
 const inputContainers = document.querySelectorAll('.select__option-container');
 const buttonEl = document.querySelector('.btn');
 const mainSection = document.querySelector('.main-section');
-const savedValue = JSON.parse(localStorage.getItem('value'));
+const savedValue = localStorage.getItem('value');
 
 for (let i = 0; i < inputContainers.length; i++) {
   if (inputContainers[i].children[0].value === savedValue) {
@@ -25,7 +25,7 @@ function handleInputClick(event) {
     event.currentTarget.children[0].classList.add('input-checked');
     const inputChecked = document.querySelector('.input-checked');
     const value = inputChecked.value;
-    localStorage.setItem('value', JSON.stringify(value));
+    localStorage.setItem('value', value);
   }
 }
 
